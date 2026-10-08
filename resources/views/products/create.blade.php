@@ -1,26 +1,18 @@
 @extends('layouts.app')
 
-@section('title', __('Új termék létrehozása'))
+@section('title', 'Új termék')
 
 @section('content')
-<h1>Új termék</h1>
+    <a href="{{ route('products.index') }}" class="back"><x-icon name="arrow-left" /> Vissza a termékekhez</a>
 
-  <form action="{{ route('products.store') }}" method="POST">
-      @csrf
+    <div class="form-card">
+        <h1>Új termék</h1>
+        <p class="muted">Add meg a termék nevét, alkoholtartalmát és kategóriáját.</p>
 
-      <label for="name">Termék neve</label>
-      <input type="text" name="name" id="name" value="{{ old('name') }}" required>
-      <label for="name">Alkoholtartalom</label>
-      <input type="text" name="percentage" id="percentage" value="{{ old('percentage') }}" required>
-      <label for="name">Kategória</label>
-      <select name="category_id" id="category_id">
-      @foreach($categories as $category)
-        <option value="{{ $category->id }}">{{ $category->name }}</option>
-      @endforeach
-      </select>
-     
-
-      <button type="submit">Mentés</button>
-      <a href="{{ route('categories.index') }}">Mégse</a>
-  </form>
+        @include('products._form', [
+            'product' => null,
+            'action'  => route('products.store'),
+            'method'  => 'POST',
+        ])
+    </div>
 @endsection

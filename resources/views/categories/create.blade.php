@@ -1,17 +1,18 @@
 @extends('layouts.app')
 
-@section('title', __('Új kategória létrehozása'))
+@section('title', 'Új kategória')
 
 @section('content')
-<h1>Új kategória</h1>
+    <a href="{{ route('categories.index') }}" class="back"><x-icon name="arrow-left" /> Vissza a kategóriákhoz</a>
 
-  <form action="{{ route('counties.store') }}" method="POST">
-      @csrf
+    <div class="form-card">
+        <h1>Új kategória</h1>
+        <p class="muted">Add meg az alkoholfajta nevét.</p>
 
-      <label for="name">Kategória neve</label>
-      <input type="text" name="name" id="name" value="{{ old('name') }}" required>
-
-      <button type="submit">Mentés</button>
-      <a href="{{ route('categories.index') }}">Mégse</a>
-  </form>
+        @include('categories._form', [
+            'category' => null,
+            'action'   => route('categories.store'),
+            'method'   => 'POST',
+        ])
+    </div>
 @endsection
